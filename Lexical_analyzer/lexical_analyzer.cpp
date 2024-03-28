@@ -106,6 +106,7 @@ vector<string> read_c_file(string file_path)
 void extract_store_tokens(vector<string> lines_of_code)
 {
     vector<pair<string, TOKEN_TYPE>> tokens;
+    SymbolTable symbol_table;
     // Generate token extractor regex from TOKENS_REGEX map
     string token_regex_str = "";
     for (auto &entry : TOKEN_REGEX)
@@ -125,6 +126,9 @@ void extract_store_tokens(vector<string> lines_of_code)
             if (!lexeme.empty())
             { // Ensure non-empty lexemes
                 TOKEN_TYPE token_type = identifyToken(lexeme);
+                // Insert identifiers in symbol table
+                if (token_type == IDENTIFIER)
+                    symbol_table.insert(lexeme, tokens.size());
                 // [B_ARITHMETIC_OP|B_BITWISE_OP]B_ASSIGNMENT_OP = B_ASSIGNMENT_OP
                 if (token_type == B_ASSIGNMENT_OP && (tokens.back().second == B_ARITHMETIC_OP || tokens.back().second == B_BITWISE_OP))
                 {
@@ -146,4 +150,5 @@ void extract_store_tokens(vector<string> lines_of_code)
     {
         cout << token.first;
     }
+    cout << symbol_table;
 }
