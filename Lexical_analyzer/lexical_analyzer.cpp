@@ -22,8 +22,32 @@ ostream &operator<<(std::ostream &out, const TOKEN_TYPE token_type)
     case STRING_LITERAL:
         out << "STRING_LITERAL";
         break;
-    case OPERATOR:
-        out << "OPERATOR";
+    case U_ARITHMETIC_OP:
+        out << "U_ARITHMETIC_OP";
+        break;
+    case POINTER_OP:
+        out << "POINTER_OP";
+        break;
+    case MEMBER_OP:
+        out << "MEMBER_OP";
+        break;
+    case TERNARY_OP:
+        out << "TERNARY_OP";
+        break;
+    case B_LOGICAL_OP:
+        out << "B_LOGICAL_OP";
+        break;
+    case B_BITWISE_OP:
+        out << "B_BITWISE_OP";
+        break;
+    case B_RELATIONAL_OP:
+        out << "B_RELATIONAL_OP";
+        break;
+    case B_ASSIGNMENT_OP:
+        out << "B_ASSIGNMENT_OP";
+        break;
+    case B_ARITHMETIC_OP:
+        out << "B_ARITHMETIC_OP";
         break;
     case SPECIAL_SYMBOL:
         out << "SPECIAL_SYMBOL";
@@ -101,6 +125,12 @@ void extract_store_tokens(vector<string> lines_of_code)
             if (!lexeme.empty())
             { // Ensure non-empty lexemes
                 TOKEN_TYPE token_type = identifyToken(lexeme);
+                // [B_ARITHMETIC_OP|B_BITWISE_OP]B_ASSIGNMENT_OP = B_ASSIGNMENT_OP
+                if (token_type == B_ASSIGNMENT_OP && (tokens.back().second == B_ARITHMETIC_OP || tokens.back().second == B_BITWISE_OP))
+                {
+                    lexeme = tokens.back().first + lexeme;
+                    tokens.pop_back();
+                }
                 tokens.push_back({lexeme, token_type});
             }
         }

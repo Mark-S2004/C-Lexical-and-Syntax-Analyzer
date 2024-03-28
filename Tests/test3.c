@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 // Define a struct with reserved keyword 'struct'
-struct Student {
+struct Student
+{
     char name[50];
     int age;
     char gender;
@@ -11,30 +12,36 @@ struct Student {
 typedef int (*Operation)(int, int);
 
 // Function to add two numbers
-int add(int a, int b) {
+int add(int a, int b)
+{
     return a + b;
 }
 
-int main() {
+int main()
+{
     // Define variables with reserved keywords
     int num1 = 10, num2 = 5;
     char ch = 'A';
     float pi = 3.14;
-    
+
     // Create an array of integers
     int arr[5] = {1, 2, 3, 4, 5};
 
     // Loop using reserved keyword 'for'
     printf("Array elements: ");
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 5; i++)
+    {
         printf("%d ", arr[i]);
     }
     printf("\n");
 
     // Conditional statement using reserved keyword 'if'
-    if (num1 > num2 && ch == 'A') {
+    if (num1 > num2 && ch == 'A')
+    {
         printf("%d is greater than %d and character is 'A'\n", num1, num2);
-    } else {
+    }
+    else
+    {
         printf("%d is less than or equal to %d or character is not 'A'\n", num1, num2);
     }
 
@@ -48,12 +55,17 @@ int main() {
 
     // Logical AND and OR operators
     int x = 10, y = 5;
-    if (x > 5 && y < 10) {
+    if (x > 5 && y < 10)
+    {
         printf("Both conditions are true\n");
     }
-    if (x > 5 || y > 10) {
+    if (x > 5 || y > 10)
+    {
         printf("At least one condition is true\n");
     }
+
+    // ternary operators
+    y += x == 5 ? 5 : 10;
 
     // Bitwise operators
     int bitwiseResult = x & y;

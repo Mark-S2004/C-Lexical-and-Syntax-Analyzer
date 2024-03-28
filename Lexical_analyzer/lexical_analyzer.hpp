@@ -13,7 +13,15 @@ enum TOKEN_TYPE
     CHARACTER_LITERAL,
     STRING_LITERAL,
     COMMENT,
-    OPERATOR,
+    U_ARITHMETIC_OP,
+    POINTER_OP,
+    MEMBER_OP,
+    TERNARY_OP,
+    B_LOGICAL_OP,
+    B_BITWISE_OP,
+    B_RELATIONAL_OP,
+    B_ASSIGNMENT_OP,
+    B_ARITHMETIC_OP,
     SPECIAL_SYMBOL,
     WHITESPACE,
     UNKNOWN
@@ -26,10 +34,18 @@ const map<TOKEN_TYPE, string> TOKEN_REGEX = {
     {FLOATING_LITERAL, "\\b[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?\\b"},
     {CHARACTER_LITERAL, "'[^']'"},
     {STRING_LITERAL, "\"[^\"]*\""},
-    {OPERATOR, "\\+\\+|--|->|<<|>>|<=|>|>=|==|!=|&&|\\|\\||!|\\||\\^|~|\\?|:|\\+=|-=|\\*=|\\/=|%=|<<=|>>=|&=|\\|\\^=|->\\*|\\.\\*|=|<|>|&|\\+|-|\\*|\\/|%"},
+    {COMMENT, "//.*"},
+    {U_ARITHMETIC_OP, "\\+\\+|--"},
+    {POINTER_OP, "->"}, // TODO: Handle *, & pointer operators
+    {MEMBER_OP, "\\."},
+    {TERNARY_OP, "\\?|:"},
+    {B_LOGICAL_OP, "&&|\\|\\||!"},
+    {B_BITWISE_OP, "<<|>>|\\||\\^|~|&"},
+    {B_RELATIONAL_OP, "==|!=|<=|>=|<|>"},
+    {B_ASSIGNMENT_OP, "="},
+    {B_ARITHMETIC_OP, "\\+|-|\\*|\\/|%"},
     {SPECIAL_SYMBOL, "\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\."},
-    {WHITESPACE, "[ \\t]+"},
-    {COMMENT, "//.*"}};
+    {WHITESPACE, "[ \\t]+"}};
 
 ostream &operator<<(std::ostream &out, const TOKEN_TYPE token_type);
 vector<string> read_c_file(string file_path);
