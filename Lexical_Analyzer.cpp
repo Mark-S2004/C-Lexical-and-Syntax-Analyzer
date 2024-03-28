@@ -3,22 +3,23 @@ using namespace std;
 
 int main()
 {
-    vector<string> lines_of_code;
+    // Step 1: Take file path as input and add each line to the lines_of_code vector
+    string file_path;
+    cout << "Enter file path: ";
+    getline(cin, file_path); // Allowing spaces and special characters in file path
 
-    regex token_regex("\".*\"|([a-zA-Z_][a-zA-Z0-9_]*)|\\(|\\)|\\{|\\}|;|[0-9]+|,|=");
-    for (auto line : lines_of_code)
+    ifstream file(file_path);
+    if (!file.is_open())
     {
-        sregex_iterator token_regex_iterator(
-            line.begin(),
-            line.end(),
-            token_regex);
-
-        sregex_iterator end;
-
-        while (token_regex_iterator != end)
-        {
-            cout << "Token: " << token_regex_iterator->str() << '\n';
-            ++token_regex_iterator;
-        }
+        cerr << "Error: Unable to open file." << endl;
+        return 1;
     }
+
+    vector<string> lines_of_code;
+    string line;
+    while (getline(file, line))
+    {
+        lines_of_code.push_back(line);
+    }
+    file.close();
 }
