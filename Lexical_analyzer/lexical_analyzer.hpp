@@ -1,6 +1,13 @@
 #pragma once
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <unordered_map>
+#include <list>
+#include <vector>
+#include <map>
+#include <string>
+#include <regex>
+#include <fstream>
 using namespace std;
 
 // Symbol Table functions and constants
@@ -37,7 +44,13 @@ enum TOKEN_TYPE
     B_RELATIONAL_OP,
     B_ASSIGNMENT_OP,
     B_ARITHMETIC_OP,
-    SPECIAL_SYMBOL,
+    RIGHT_BRACKET, 
+    LEFT_BRACKET,
+    RIGHT_BRACE,
+    LEFT_BRACE,
+    LEFT_SQUARE_BRACKET,
+    RIGHT_SQUARE_BRACKET,
+    PUNCTUATION,
     WHITESPACE,
     UNKNOWN
 };
@@ -59,7 +72,13 @@ const map<TOKEN_TYPE, string> TOKEN_REGEX = {
     {B_RELATIONAL_OP, "==|!=|<=|>=|<|>"},
     {B_ASSIGNMENT_OP, "="},
     {B_ARITHMETIC_OP, "\\+|-|\\*|\\/|%"},
-    {SPECIAL_SYMBOL, "\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\."},
+    {RIGHT_BRACKET, "\\("},
+    {LEFT_BRACKET, "\\)"},
+    {RIGHT_BRACE, "\\{"},
+    {LEFT_BRACE, "\\}"},
+    {LEFT_SQUARE_BRACKET, "\\["},
+    {RIGHT_SQUARE_BRACKET, "\\]"},
+    {PUNCTUATION, ",|;|\\."},
     {WHITESPACE, "[ \\t]+"}};
 
 ostream &operator<<(std::ostream &out, const TOKEN_TYPE token_type);

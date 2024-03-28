@@ -49,8 +49,26 @@ ostream &operator<<(std::ostream &out, const TOKEN_TYPE token_type)
     case B_ARITHMETIC_OP:
         out << "B_ARITHMETIC_OP";
         break;
-    case SPECIAL_SYMBOL:
-        out << "SPECIAL_SYMBOL";
+    case RIGHT_BRACKET:
+        out << "RIGHT_BRACKET";
+        break;
+    case LEFT_BRACKET:
+        out << "LEFT_BRACKET";
+        break;
+    case RIGHT_BRACE:
+        out << "RIGHT_BRACE";
+        break;
+    case LEFT_BRACE:
+        out << "LEFT_BRACE";
+        break;
+    case LEFT_SQUARE_BRACKET:
+        out << "LEFT_SQUARE_BRACKET";
+        break;
+    case RIGHT_SQUARE_BRACKET:
+        out << "RIGHT_SQUARE_BRACKET";
+        break;
+    case PUNCTUATION:
+        out << "PUNCTUATION";
         break;
     case WHITESPACE:
         out << "WHITESPACE";
