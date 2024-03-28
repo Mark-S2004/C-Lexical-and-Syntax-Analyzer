@@ -103,7 +103,7 @@ vector<string> read_c_file(string file_path)
 }
 
 // Extract and store tokens in symbol table and hashmap
-void extract_store_tokens(vector<string> lines_of_code)
+pair<vector<pair<string, TOKEN_TYPE>>, SymbolTable> extract_store_tokens(vector<string> lines_of_code)
 {
     vector<pair<string, TOKEN_TYPE>> tokens;
     SymbolTable symbol_table;
@@ -135,20 +135,11 @@ void extract_store_tokens(vector<string> lines_of_code)
                     lexeme = tokens.back().first + lexeme;
                     tokens.pop_back();
                 }
-                tokens.push_back({lexeme, token_type});
+                if (token_type != COMMENT && token_type != WHITESPACE)
+                    tokens.push_back({lexeme, token_type});
             }
         }
     }
 
-    // Print tokens
-    cout << "Tokens:" << endl;
-    for (const auto &token : tokens)
-    {
-        cout << "(" << token.first << ", " << token.second << ")" << endl;
-    }
-    for (const auto &token : tokens)
-    {
-        cout << token.first;
-    }
-    cout << symbol_table;
+    return {tokens, symbol_table};
 }
