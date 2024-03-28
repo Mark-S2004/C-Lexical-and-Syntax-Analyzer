@@ -18,8 +18,9 @@ int main()
     cout << "Lexemes:" << endl;
     for (const auto &token : tokens)
     {
-        cout << token.first<<endl;
+        cout << token.first;
     }
+    cout<<endl;
     cout << "Symbol Table:" << endl;
     cout << symbol_table;
 }
