@@ -11,8 +11,13 @@ void SymbolTable::display(ostream &out)
     for (auto &identifier : symbol_table_hashmap)
     {
         cout << '<' << identifier.first << ", {";
-        for (auto &offset : identifier.second)
-            cout << offset << ", ";
+        bool first = true; 
+        for (auto &offset : identifier.second) {
+            if (!first) 
+                cout << ", ";
+            cout << offset;
+            first = false; 
+        }
         cout << "}>\n";
     }
 }
