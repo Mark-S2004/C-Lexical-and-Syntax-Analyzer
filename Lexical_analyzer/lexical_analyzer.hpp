@@ -50,7 +50,8 @@ enum TOKEN_TYPE
     LEFT_BRACE,
     LEFT_SQUARE_BRACKET,
     RIGHT_SQUARE_BRACKET,
-    PUNCTUATION,
+    COMMA,
+    SEMICOLON,
     WHITESPACE,
     UNKNOWN
 };
@@ -78,7 +79,8 @@ const map<TOKEN_TYPE, string> TOKEN_REGEX = {
     {LEFT_BRACE, "\\}"},
     {LEFT_SQUARE_BRACKET, "\\["},
     {RIGHT_SQUARE_BRACKET, "\\]"},
-    {PUNCTUATION, ",|;"},
+    {SEMICOLON, ";"},
+    {COMMA, ","},
     {WHITESPACE, "[ \\t]+"}};
 
 ostream &operator<<(std::ostream &out, const TOKEN_TYPE token_type);

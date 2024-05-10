@@ -67,8 +67,11 @@ ostream &operator<<(std::ostream &out, const TOKEN_TYPE token_type)
     case RIGHT_SQUARE_BRACKET:
         out << "RIGHT_SQUARE_BRACKET";
         break;
-    case PUNCTUATION:
-        out << "PUNCTUATION";
+    case SEMICOLON:
+        out << "SEMICOLON";
+        break;
+    case COMMA:
+        out << "COMMA";
         break;
     case WHITESPACE:
         out << "WHITESPACE";
