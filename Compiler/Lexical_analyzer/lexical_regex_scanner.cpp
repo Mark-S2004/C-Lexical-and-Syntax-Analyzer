@@ -42,7 +42,6 @@ vector<string> read_c_file(string file_path)
 // Extract and store tokens in symbol table and hashmap
 pair<vector<pair<string, TOKEN_TYPE>>, SymbolTable> extract_store_tokens(vector<string> lines_of_code)
 {
-    SymbolTable symbol_table;
     // Generate token extractor regex from TOKENS_REGEX map
     string token_regex_str = "";
     for (auto &entry : TOKEN_REGEX)

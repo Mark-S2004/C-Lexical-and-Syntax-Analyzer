@@ -2,6 +2,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Symbol Table functions and constants
+class SymbolTable
+{
+    unordered_map<string, list<int>> symbol_table_hashmap;
+
+public:
+    SymbolTable() {}
+
+    void insert(string name, int offset);
+    void display(ostream &out);
+};
+ostream &operator<<(std::ostream &out, SymbolTable symbol_table);
+
 // Tokens constants
 enum TOKEN_TYPE
 {
@@ -40,6 +53,7 @@ enum TOKEN_TYPE
 };
 
 inline vector<pair<string, TOKEN_TYPE>> token_stream;
+inline SymbolTable symbol_table;
 
 const map<TOKEN_TYPE, string> TOKEN_REGEX = {
     {RESERVED_KEYWORD, "\\b(alignas|alignof|auto|bool|break|case|const|constexpr|continue|default|do|enum|extern|for|goto|inline|nullptr|register|restrict|return|signed|sizeof|static|static_assert|struct|switch|thread_local|typedef|typeof|typeof_unqual|union|unsigned|void|volatile|_Alignas|_Alignof|_Atomic|_BitInt|_Bool|_Complex|_Decimal128|_Decimal32|_Decimal64|_Generic|_Imaginary|_Noreturn|_Static_assert|_Thread_local)\\b"},

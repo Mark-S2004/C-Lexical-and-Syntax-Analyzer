@@ -3,19 +3,6 @@
 #include "../tokens_enum.hpp"
 using namespace std;
 
-// Symbol Table functions and constants
-class SymbolTable
-{
-    unordered_map<string, list<int>> symbol_table_hashmap;
-
-public:
-    SymbolTable() {}
-
-    void insert(string name, int offset);
-    void display(ostream &out);
-};
-ostream &operator<<(std::ostream &out, SymbolTable symbol_table);
-
 // Lexical Analyzer functions
 ostream &operator<<(std::ostream &out, const TOKEN_TYPE token_type);
 vector<string> read_c_file(string file_path);
