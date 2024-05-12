@@ -150,16 +150,14 @@ parse_tree_node *generate_parse_tree()
 
     // And now let the LL(1) cooking begin
     // While the stack hasn't reached the bottom entry yet, and the buffer still has content
-    cout << "off " << buffer_offset << endl;
-    cout << "top " << parsing_stack.top()->label << endl;
     while (parsing_stack.top()->label != "EndOfFile" && buffer_offset != 0)
     {
         // We will be working with the top of stack every iteration, see what to do with it
         parse_tree_node *top_of_stack = parsing_stack.top();
 
-        cout << "[LOG] | Current top of stack: \"" << top_of_stack->label;
-        cout << "\" and current token in buffer: \"" << buf;
-        cout << "\", " << type_to_str(tok) << '\n';
+        // cout << "[LOG] | Current top of stack: \"" << top_of_stack->label;
+        // cout << "\" and current token in buffer: \"" << buf;
+        // cout << "\", " << type_to_str(tok) << '\n';
 
         // If it is a terminal,
         if (top_of_stack->is_terminal)
@@ -169,12 +167,7 @@ parse_tree_node *generate_parse_tree()
             {
                 // If it does, pop the stack, get the next token, and move on to the next iteration
                 // But before you do, augment the node with the value of the variable (if it is a variable, like type_to_str(identifier) or number)
-                if (tok == IDENTIFIER)
-                    parsing_stack.top()->label += ":\\n" + buf;
-                if (tok == INTEGER_LITERAL || tok == FLOATING_LITERAL || tok == STRING_LITERAL || tok == CHARACTER_LITERAL)
-                    parsing_stack.top()->label += ":\\n" + buf;
-                if (buf == "!")
-                    parsing_stack.top()->label = "!";
+                parsing_stack.top()->label = buf;
                 parsing_stack.pop();
                 buffer_offset = get_next_token();
                 continue;
@@ -202,8 +195,7 @@ parse_tree_node *generate_parse_tree()
     }
 
     // If the loop finishes with no errors, and the top of the stack is $, with an empty buffer, then all is well
-    cout << buf;
-    if (parsing_stack.top()->label == "EndOfFile" && buffer_offset == 0)
+    if (buffer_offset == 0)
         return root;
     // Otherwise, either the stack or the buffer finished prematurely, so, parse failure
     else
@@ -213,5 +205,13 @@ parse_tree_node *generate_parse_tree()
 void parse()
 {
     init_parsing_table();
-    generate_parse_tree();
+    parse_tree_node *parse_tree_root_node;
+
+    parse_tree_root_node = generate_parse_tree();
+
+    cout << parse_tree_root_node;
+
+    cout << (parse_tree_root_node ? "Parsing successful.\n" : "Parsing failed.\n") << endl;
+    if (parse_tree_root_node)
+        visualize_parse_tree(parse_tree_root_node);
 }
